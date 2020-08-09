@@ -1,0 +1,12 @@
+package com.digital.factory.generale;
+
+public enum FragilityProduitConstants {
+	GLASS,
+	LABORATORY_MATERIALS,
+	TECHNOLOGICAL_ACCESSORIES,
+	MARBLE,
+	TILES,
+	PORCELAINS,
+	OPTICAL_INSTRUMENTS,
+	VALUABLE_COLLECTIBLES
+} 
