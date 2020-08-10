@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.digital.factory.generale.StatusCommandeConstants;
 import com.digital.factory.stock.Stock;
 import com.digital.factory.stock.produit.ProduitStock;
 
@@ -26,7 +27,7 @@ public class Command {
 	@Column
 	private Date date = new Date();
 	@Column
-	private boolean status = false;
+	private String status = StatusCommandeConstants.pending;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Stock stock;
 	@OneToMany(cascade = CascadeType.ALL)

@@ -1,4 +1,4 @@
-package com.digital.factory.command;
+package com.digital.factory.owner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,39 +12,40 @@ import org.springframework.web.bind.annotation.RestController;
 import com.digital.factory.generale.ResponseEntity;
 
 @RestController
-@RequestMapping("/commands")
-public class CommandController {
+@RequestMapping("/owners")
+public class OwnerController {
 	
 	@Autowired
-	private CommandService commandService;
+	private OwnerService ownerService;
 	ResponseEntity responseEntity;
 	
     @GetMapping("/")
-    public ResponseEntity getCommands() {
+    public ResponseEntity getOwners() {
     	responseEntity = new ResponseEntity();
-    	return responseEntity.setMessage(commandService.getAllCommand(),200);
-    }
-    @GetMapping("/{id}")
-    public ResponseEntity getCommandById(@PathVariable("id") final long id ) {
-    	responseEntity = new ResponseEntity();
-    	return responseEntity.setMessage(commandService.getCommandById(id),200);
-    }
-    @DeleteMapping("/{id}")
-    public ResponseEntity deleteCommandById(@PathVariable("id") final long id ) {
-    	responseEntity = new ResponseEntity();
-    	return responseEntity.setMessage(commandService.deleteCommandById(id),200);
+    	return responseEntity.setMessage(ownerService.getAllOwner(),200);
     }
     
+    @GetMapping("/{id}")
+    public ResponseEntity getOwnerById(@PathVariable("id") final long id ) {
+    	responseEntity = new ResponseEntity();
+    	return responseEntity.setMessage(ownerService.getOwnerById(id),200);
+    }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteOwnerById(@PathVariable("id") final long id ) {
+    	responseEntity = new ResponseEntity();
+    	return responseEntity.setMessage(ownerService.deleteOwnerById(id),200);
+    }
+    
+    
     @PostMapping("/")
-    public ResponseEntity createCommand(@RequestBody CommandDTO commandDTO) {
+    public ResponseEntity createOwner(@RequestBody Owner owner) {
     	responseEntity = new ResponseEntity();
     	try {
-        	return responseEntity.setMessage(commandService.saveCommand(commandDTO),200);
+        	return responseEntity.setMessage(ownerService.createOwner(owner),200);
     	}catch(Exception e) {
         	return responseEntity.setErrorMessage(e.toString(), 403);
     	}
     }
-    
-    
 
 }

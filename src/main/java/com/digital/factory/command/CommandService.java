@@ -41,6 +41,10 @@ public class CommandService {
 		return commandRepository.save(command);
 	}
 	
+	public Command updateCommandStatus(Command command) {
+		return commandRepository.save(command);
+	}
+	
 	public String deleteCommandById(long id) {
 		commandRepository.deleteById(id);
 		return "deleted successful!";
@@ -54,5 +58,7 @@ public class CommandService {
 		Optional<Command> command = commandRepository.findById(id);
 		return command.get();
 	}
+	
+	
 
 }

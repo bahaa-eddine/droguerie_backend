@@ -1,4 +1,4 @@
-package com.digital.factory.command;
+package com.digital.factory.supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,39 +12,40 @@ import org.springframework.web.bind.annotation.RestController;
 import com.digital.factory.generale.ResponseEntity;
 
 @RestController
-@RequestMapping("/commands")
-public class CommandController {
-	
+@RequestMapping("/suppliers")
+public class SupplierController {
+
 	@Autowired
-	private CommandService commandService;
+	private SupplierService supplierService;
 	ResponseEntity responseEntity;
 	
     @GetMapping("/")
-    public ResponseEntity getCommands() {
+    public ResponseEntity getSuppliers() {
     	responseEntity = new ResponseEntity();
-    	return responseEntity.setMessage(commandService.getAllCommand(),200);
-    }
-    @GetMapping("/{id}")
-    public ResponseEntity getCommandById(@PathVariable("id") final long id ) {
-    	responseEntity = new ResponseEntity();
-    	return responseEntity.setMessage(commandService.getCommandById(id),200);
-    }
-    @DeleteMapping("/{id}")
-    public ResponseEntity deleteCommandById(@PathVariable("id") final long id ) {
-    	responseEntity = new ResponseEntity();
-    	return responseEntity.setMessage(commandService.deleteCommandById(id),200);
+    	return responseEntity.setMessage(supplierService.getAllSupplier(),200);
     }
     
+    @GetMapping("/{id}")
+    public ResponseEntity getSupplierById(@PathVariable("id") final long id ) {
+    	responseEntity = new ResponseEntity();
+    	return responseEntity.setMessage(supplierService.getSupplierById(id),200);
+    }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteSupplierById(@PathVariable("id") final long id ) {
+    	responseEntity = new ResponseEntity();
+    	return responseEntity.setMessage(supplierService.deleteSupplierById(id),200);
+    }
+    
+    
     @PostMapping("/")
-    public ResponseEntity createCommand(@RequestBody CommandDTO commandDTO) {
+    public ResponseEntity createSupplier(@RequestBody Supplier supplier) {
     	responseEntity = new ResponseEntity();
     	try {
-        	return responseEntity.setMessage(commandService.saveCommand(commandDTO),200);
+        	return responseEntity.setMessage(supplierService.createSupplier(supplier),200);
     	}catch(Exception e) {
         	return responseEntity.setErrorMessage(e.toString(), 403);
     	}
     }
-    
-    
 
 }
