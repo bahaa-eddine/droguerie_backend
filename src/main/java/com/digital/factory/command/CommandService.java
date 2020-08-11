@@ -7,10 +7,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.digital.factory.produit.ProductRepository;
+import com.digital.factory.product.ProductRepository;
 import com.digital.factory.stock.Stock;
 import com.digital.factory.stock.StockRepository;
-import com.digital.factory.stock.produit.ProduitStock;
+import com.digital.factory.stock.produit.ProductStock;
 
 @Service
 public class CommandService {
@@ -23,18 +23,22 @@ public class CommandService {
     private ProductRepository productRepository;
 	Command command;
 	Stock stock;
-	ProduitStock productStock;
-	List<ProduitStock> productStocks = new ArrayList<ProduitStock>();;
+	ProductStock productStock;
+	List<ProductStock> productStocks;
 	
 	
 	public Command saveCommand(CommandDTO commandDTO) {
 		stock = stockRepository.findById(commandDTO.getIdStock()).get();
+		System.out.println(stock.toString());
+		System.out.println(commandDTO.toString());
+		productStocks = new ArrayList<ProductStock>();
 		commandDTO.getProductQuantities().forEach((productQuantity) -> {
-			productStock = new ProduitStock();
-			productStock.setProduit(productRepository.findById(productQuantity.getIdProduct()).get());
+			productStock = new ProductStock();
+			productStock.setProduct(productRepository.findById(productQuantity.getIdProduct()).get());
 			productStock.setQuantity((Integer) productQuantity.getQuantity());
 			productStocks.add(productStock);
 		});
+		
 		command = new Command();
 		command.setStock(stock);
 		command.setProducts(productStocks);

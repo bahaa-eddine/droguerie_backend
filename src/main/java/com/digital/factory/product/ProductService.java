@@ -1,4 +1,4 @@
-package com.digital.factory.produit;
+package com.digital.factory.product;
 
 import java.util.Optional;
 

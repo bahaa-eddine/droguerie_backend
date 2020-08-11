@@ -14,7 +14,7 @@ import javax.persistence.OneToOne;
 
 import com.digital.factory.generale.StatusCommandeConstants;
 import com.digital.factory.stock.Stock;
-import com.digital.factory.stock.produit.ProduitStock;
+import com.digital.factory.stock.produit.ProductStock;
 
 import lombok.Data;
 
@@ -31,5 +31,5 @@ public class Command {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Stock stock;
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<ProduitStock> products;
+	private List<ProductStock> products;
 }

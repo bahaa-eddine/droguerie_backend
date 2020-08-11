@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.digital.factory.generale.ResponseEntity;
-import com.digital.factory.produit.Product;
+import com.digital.factory.product.Product;
 
 @RestController
 @RequestMapping("/products")

@@ -8,21 +8,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import com.digital.factory.produit.Product;
+import com.digital.factory.product.Product;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.Data;
 
 @Data
 @Entity
-public class ProduitStock {
+public class ProductStock {
 	@Id
-	@JsonProperty(access = Access.WRITE_ONLY)
+	@JsonProperty
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long Id;
+	private Long id;
 	@OneToOne(cascade = { CascadeType.ALL })
-	private Product produit;
+	private Product product;
 	@Column
 	private Integer quantity;
 }

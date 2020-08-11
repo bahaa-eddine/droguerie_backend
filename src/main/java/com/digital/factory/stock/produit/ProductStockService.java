@@ -7,38 +7,43 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.digital.factory.produit.Product;
-import com.digital.factory.produit.ProductRepository;
+import com.digital.factory.command.Command;
 import com.digital.factory.stock.Stock;
 import com.digital.factory.stock.StockRepository;
+import com.digital.factory.stock.StockService;
+import com.digital.factory.supplier.comand.SupplierCommandDTO;
 
 @Service
 public class ProductStockService {
 
 	@Autowired
-	private ProductRepository produitRepository;
-	@Autowired
 	private StockRepository stockRepository;
-
-	ProduitStock produitStock;
-	Product produit;
-	List<ProduitStock> produitStocks = new ArrayList<>();
-
-//	public Optional<Stock> addProductToStock(ProductStockDTO productStockDTO) {
-//
-//		return stockRepository.findById(productStockDTO.getIdStock()).map(stock -> {
-//			System.out.println(stock.toString());
-//			for (ProductQuantiteDTO productQuantiteDTO : productStockDTO.getProductQuantities()) {
-//				produit = produitRepository.findById(productQuantiteDTO.getIdProduct()).get();
-//				produitStock = new ProduitStock();
-//				produitStock.setProduit(produit);
-//				produitStock.setQuantity((Integer) productQuantiteDTO.getQuantity());
-//				produitStocks.add(produitStock);
-//				System.out.println(produitStocks.toArray().toString());
-//			}
-//			stock.getProductsStock().addAll(produitStocks);
-//			return stockRepository.save(stock);
-//		});
-//	}
+	@Autowired
+	private StockService stockService;
+	List<ProductStock> products;
+	boolean exist = false;
+	
+	public Optional<Stock> addProductToStock(Command command, SupplierCommandDTO supplierCommandDTO) {
+		return stockRepository.findById(command.getStock().getId()).map(stock -> {
+			if (stock.getProducts().isEmpty()) {
+				stock.getProducts().addAll(command.getProducts());
+			} else {
+				products = new ArrayList<>();
+				command.getProducts().forEach(productCommand -> {
+					exist = false;
+					stock.getProducts().forEach(productStock -> {
+						if(productStock.getProduct().getId() == productCommand.getProduct().getId()) {
+							productStock.setQuantity(productStock.getQuantity() + productCommand.getQuantity());
+							exist = true;
+						}
+					});
+					if(!exist) {						
+						stock.getProducts().add(productCommand);
+					}
+				});
+			}
+			return stockRepository.save(stock);
+		});
+	}
 
 }

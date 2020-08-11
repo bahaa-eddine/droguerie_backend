@@ -12,15 +12,18 @@ import com.digital.factory.owner.OwnerService;
 @Service
 public class OwnerCommandService {
 
-	
 	@Autowired
 	private OwnerService ownerService;
-	@Autowired 
+	@Autowired
 	private CommandService commandService;
-	
+	Command command;
+	Owner owner;
+
 	public Owner requestCommandForOwner(long idOwner, CommandDTO commandDTO) {
-		Command command = commandService.saveCommand(commandDTO);
-		Owner owner = ownerService.getOwnerById(idOwner);
+		command = new Command();
+		owner = new Owner();
+		command = commandService.saveCommand(commandDTO);
+		owner = ownerService.getOwnerById(idOwner);
 		owner.getCommands().add(command);
 		return ownerService.createOwner(owner);
 	}

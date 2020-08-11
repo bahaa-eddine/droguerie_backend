@@ -1,4 +1,4 @@
-package com.digital.factory.produit;
+package com.digital.factory.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;

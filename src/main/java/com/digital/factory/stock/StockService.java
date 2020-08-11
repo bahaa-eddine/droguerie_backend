@@ -1,15 +1,20 @@
 package com.digital.factory.stock;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.digital.factory.product.Product;
 
 @Service
 public class StockService {
 
 	@Autowired
 	private StockRepository stockRepository;
+	Map<Product, Integer> products;
 
 	public Stock saveStock(Stock stock) {
 		return stockRepository.save(stock);
@@ -33,5 +38,5 @@ public class StockService {
 		Optional<Stock> stock = stockRepository.findStockByName(name);
 		return stock.get();
 	}
-
+	
 }
