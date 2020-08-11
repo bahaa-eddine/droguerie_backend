@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.digital.factory.command.Command;
 import com.digital.factory.stock.Stock;
 import com.digital.factory.stock.StockRepository;
-import com.digital.factory.stock.StockService;
 import com.digital.factory.supplier.comand.SupplierCommandDTO;
 
 @Service
@@ -18,8 +17,6 @@ public class ProductStockService {
 
 	@Autowired
 	private StockRepository stockRepository;
-	@Autowired
-	private StockService stockService;
 	List<ProductStock> products;
 	boolean exist = false;
 	
