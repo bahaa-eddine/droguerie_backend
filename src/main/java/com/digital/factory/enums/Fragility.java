@@ -1,6 +1,6 @@
-package com.digital.factory.generale;
+package com.digital.factory.enums;
 
-public enum FragilityProduitConstants {
+public enum Fragility {
 	GLASS,
 	LABORATORY_MATERIALS,
 	TECHNOLOGICAL_ACCESSORIES,

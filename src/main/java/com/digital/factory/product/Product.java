@@ -2,10 +2,14 @@ package com.digital.factory.product;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.digital.factory.enums.Categorie;
+import com.digital.factory.enums.Fragility;
 import com.sun.istack.NotNull;
 
 import lombok.Data;
@@ -27,8 +31,10 @@ public class Product {
 	private Double price;
     @Column
     @NotNull
-	private String fragility;
+    @Enumerated(EnumType.STRING)
+	private Fragility fragility;
     @Column
     @NotNull
-	private String categorie;
+    @Enumerated(EnumType.STRING)
+	private Categorie categorie;
 }

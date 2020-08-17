@@ -1,6 +1,6 @@
-package com.digital.factory.generale;
+package com.digital.factory.enums;
 
-public enum CategorieProduitConstants {
+public enum Categorie {
 	PLOMBERIEN,
 	ELECTRICITE,
 	QUINCAILLERIE,
